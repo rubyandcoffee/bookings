@@ -1,15 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import AppointmentItem from './AppointmentItem.vue'
+import axios from 'axios'
+import FeatureItem from './FeatureItem.vue';
 // let sortBy = 'time'
-const appointments = ref([
-  { time: '10am', appointmentType: 'Massage', staffMember: 'Sarah', available: true },
-  { time: '11am', appointmentType: 'Haircut', staffMember: 'Mike', available: false },
-  { time: '1pm', appointmentType: 'Nails', staffMember: 'Jane', available: true },
-  { time: '2pm', appointmentType: 'Haircut', staffMember: 'Mike', available: true },
-  { time: '3pm', appointmentType: 'Massage', staffMember: 'Sarah', available: false },
-  { time: '4pm', appointmentType: 'Nails', staffMember: 'Jane', available: false },
-])
+// const appointments = ref([
+//   { time: '10am', appointmentType: 'Massage', staffMember: 'Sarah', available: true },
+//   { time: '11am', appointmentType: 'Haircut', staffMember: 'Mike', available: false },
+//   { time: '1pm', appointmentType: 'Nails', staffMember: 'Jane', available: true },
+//   { time: '2pm', appointmentType: 'Haircut', staffMember: 'Mike', available: true },
+//   { time: '3pm', appointmentType: 'Massage', staffMember: 'Sarah', available: false },
+//   { time: '4pm', appointmentType: 'Nails', staffMember: 'Jane', available: false },
+// ])
+
+let appointments = getAppointments();
+
+function getAppointments() {
+  axios
+    .get('http://localhost:3000/api/v1/bookings/list')
+    .then((response) => {
+      console.log(response.data)
+      appointments = response.data
+    })
+}
 
 let results = ref(appointments)
 
@@ -22,14 +35,14 @@ let results = ref(appointments)
 // }
 
 function sortByStatus() {
-  return results.value.sort((a, b) => (a.available < b.available ? 1 : -1));
+  return results.sort((a, b) => (a.status < b.status ? 1 : -1));
 }
 
 function sortByTime() {
   return results.value.sort((a, b) => (a.time < b.time ? -1 : 1));
 }
 
-const getInitialItems = () => appointments
+const getInitialItems = () => getAppointments()
 
 function reset() {
   results = getInitialItems()
