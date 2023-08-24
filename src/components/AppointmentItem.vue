@@ -20,6 +20,11 @@
         <slot name="status"></slot>
       </p>
     </div>
+    <div class="button">
+      <button>
+        <slot name="button"></slot>
+      </button>
+    </div>
   </div>
 </template>
 

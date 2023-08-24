@@ -11,7 +11,7 @@ import Greeting from './components/Greeting.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/booking">Bookings</RouterLink>
+        <RouterLink to="/bookings">Bookings</RouterLink>
         <RouterLink to="/messages">Messages</RouterLink>
         <RouterLink to="/payments">Payments</RouterLink>
       </nav>

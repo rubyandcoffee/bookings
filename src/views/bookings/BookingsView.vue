@@ -1,10 +1,10 @@
 <script setup lang="ts">
 // import Bookings from '../components/Bookings.vue'
-import Appointments from '../components/Appointment.vue'
+import Appointments from '../../components/Appointment.vue'
 </script>
 
 <template>
-  <div class="booking">
+  <div class="bookings">
     <Appointments />
   </div>
 </template>

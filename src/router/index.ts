@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import MessagesView from '../views/MessagesView.vue'
+import PaymentsView from '../views/PaymentsView.vue'
+import BookingsView from '../views/bookings/BookingsView.vue'
+import BookingDetailsView from '../views/bookings/BookingDetails.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,19 +15,29 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/booking',
+      path: '/about',
+      name: 'about',
+      component: AboutView
+    },
+    {
+      path: '/bookings',
       name: 'bookings',
-      component: () => import('../views/BookingView.vue')
+      component: BookingsView
+    },
+    {
+      path: '/bookings/:id',
+      name: 'BookingDetails',
+      component: BookingDetailsView
     },
     {
       path: '/messages',
       name: 'messages',
-      component: () => import('../views/MessagesView.vue')
+      component: MessagesView
     },
     {
       path: '/payments',
       name: 'payments',
-      component: () => import('../views/PaymentsView.vue')
+      component: PaymentsView
     }
   ]
 })

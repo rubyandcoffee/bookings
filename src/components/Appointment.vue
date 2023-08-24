@@ -1,9 +1,9 @@
-const dayjs = require('dayjs')
+<!-- const dayjs = require('dayjs') -->
 <script setup lang="ts">
 import { ref, onBeforeMount, type Ref } from 'vue';
 import AppointmentItem from './AppointmentItem.vue'
 import axios from 'axios'
-import FeatureItem from './FeatureItem.vue';
+// import FeatureItem from './FeatureItem.vue';
 import dayjs from 'dayjs'
 
 onBeforeMount(() => {
@@ -50,11 +50,12 @@ function sortByTime() {
     </select> -->
     <TransitionGroup name="list" tag="div">
       <div v-for="(result, index) in appointments" :key="index" class="results">
-        <AppointmentItem :class="result.status ? 'available' : 'unavailable'">
+        <AppointmentItem :class="result.status ? 'available' : 'unavailable'"> <!-- should this have the :key="index"? -->
           <template #time>{{ dayjs(result.date).format('HH:mm on ddd DD MMMM') }}</template>
           <template #staffMember>{{ result.staff_member.name }}</template>
           <template #appointmentType>{{ result.service.title }}</template>
           <template #status>{{ result.available ? 'Available' : 'Unavailable' }}</template>
+          <template #button><RouterLink :to="{ name: 'BookingDetails', params: { id: result.id } }">Reserve</RouterLink></template>
         </AppointmentItem>
       </div>
     </TransitionGroup>
